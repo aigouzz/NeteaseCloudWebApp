@@ -71,7 +71,7 @@ export default {
     next(vm => {
       // 根据传过来的ID是否一样，判断加载
       if (parseInt(to.params.id) !== parseInt(vm.id)) {
-        vm.get()
+        vm.getData()
       }
       // 判断过来的路由是否带有对应的参数信息
       if (to.params.coverImg) {
@@ -103,7 +103,7 @@ export default {
     back () {
       this.$router.go(-1)
     },
-    get () {
+    getData () {
       this.isloading = true
       this.$http.get(api.getPlayListDetail(this.$route.params.id)).then(data => {
         this.list = data.playlist.tracks

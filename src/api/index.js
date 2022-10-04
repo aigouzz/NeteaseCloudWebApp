@@ -1,5 +1,4 @@
-const _baseUrl = 'http://api.javaswing.cn'
-const _baseUrl2 = 'https://api.imjad.cn/cloudmusic/'
+const _baseUrl = 'http://127.0.0.1:3000'
 export default {
   /**
    * 获取首页Banner图片数据
@@ -52,9 +51,9 @@ export default {
     return `${_baseUrl}/playlist/detail?id=${id}`
   },
   getMv (id) {
-    return _baseUrl2 + '?type=mv&id=' + id
+    return _baseUrl + '?type=mv&id=' + id
   },
   search (words) {
-    return _baseUrl2 + '?type=search&s=' + words
+    return _baseUrl + '?type=search&s=' + words
   }
 }

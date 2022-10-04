@@ -16,9 +16,9 @@
       <mu-flexbox wrap="wrap" justify="space-around" class="box" :gutter="0">
         <mu-flexbox-item basis="28%" class="item" :key="item.id" v-for="item in playList">
           <router-link :to="{name: 'playListDetail',params: { id: item.id, name: item.name, coverImg: item.picUrl, creator: item.copywriter, count: item.playCount, desc: item.description }}">
-          <div class="bar">{{item.playCount | formatCount}}</div>
-          <img class="item-img img-response" :src="item.picUrl" lazy="loading">
-          <div class="item-name">{{item.name}}</div>
+            <div class="bar">{{item.playCount | formatCount}}</div>
+            <img class="item-img img-response" :src="item.picUrl" lazy="loading">
+            <div class="item-name">{{item.name}}</div>
           </router-link>
         </mu-flexbox-item>
       </mu-flexbox>
@@ -202,6 +202,11 @@ export default {
         this.bannerList = data[1].banners
         this.mvList = data[2].result.length > 6 ? data[2].result.slice(0, 6) : data[2].result
         this.isloading = false
+      }).catch((err) => {
+        this.$toast(err, {
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        })
       })
     }
   },
