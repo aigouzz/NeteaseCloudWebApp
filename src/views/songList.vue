@@ -27,13 +27,13 @@ export default {
     }
   },
   created () {
-    this.get()
+    this.getData()
   },
   mounted () {
     this.scroller = this.$el
   },
   methods: {
-    get () {
+    getData () {
       this.loading = true
       this.$http.get(api.getPlayListByWhere(this.offset, 6)).then((data) => {
         var total = data.total
@@ -47,7 +47,7 @@ export default {
       })
     },
     loadMore () {
-      this.get()
+      this.getData()
     }
   },
   filters: {
