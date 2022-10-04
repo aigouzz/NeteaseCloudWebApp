@@ -2,8 +2,10 @@
     <div>
       <div class="fixed-bar">
       <mu-appbar>
-        <div class="logo" slot="left"></div>
-        <mu-icon-button icon='search'  slot="right"/>
+        <router-link class="banner-logo" to="/index/rage"></router-link>
+        <router-link class="banner-search" to="/search">
+          <mu-icon-button icon="search"></mu-icon-button>
+        </router-link>
       </mu-appbar>
       <mu-tabs :value="activeTab" @change="handleTabChange" class="view-tabs">
         <mu-tab value="rage" title="时下流行"/>
@@ -59,11 +61,19 @@
 </script>
 <style lang="less" scoped>
   @import "../assets/theme.less";
-  .logo {
+  .banner-logo {
     width: 150px;
     height: 48px;
-    background: url("../../static/logo.png") no-repeat left center;
-    background-size: cover;
+    background: url("../../static/logo.png") no-repeat;
+    background-size: 150px 48px;
+    display: block;
+    float: left;
+  }
+  .banner-search{
+    display: block;
+    float: right;
+    height: 100%;
+    color: white;
   }
   .view-tabs {
     background-color: #fff;

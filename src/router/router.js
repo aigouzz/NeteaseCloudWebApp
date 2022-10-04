@@ -36,7 +36,13 @@ const router = new VueRouter({
     path: '/playListDetail/:id',
     name: 'playListDetail',
     component: require('../views/playListDetail')
-  }, {
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: require('../views/search.vue')
+  },
+  {
     path: '*', redirect: '/index/rage'
   }]
 })
