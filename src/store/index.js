@@ -126,7 +126,7 @@ const store = new Vuex.Store({
       var items = songs.slice()
       items.forEach(item => {
         var flag = false
-        state.songList.forEach(function (element, index) { // 检测歌曲重复
+        state.songList.forEach((element, index) => { // 检测歌曲重复
           if (element.id === item.id) {
             flag = true
             state.currentIndex = index + 1
@@ -137,6 +137,7 @@ const store = new Vuex.Store({
           state.currentIndex = state.songList.length
         }
       })
+      console.log(state.songList, state.currentIndex)
     },
     setLrc (state, lrc) {
       state.lyric = lrc
@@ -160,14 +161,21 @@ const store = new Vuex.Store({
         // 统一数据模型，方便后台接口的改变
         console.log(data)
         let playAudio = []
-        data[1].data.forEach((item, index) => {
+        data[0].songs.forEach((item, index) => {
+          let location = ''
+          for (let i = 0; i < data[1].data.length; i++) {
+            if (data[1].data[i].id === item.id) {
+              location = data[1].data[i].url
+              break
+            }
+          }
           playAudio.push({
             id: item.id,
-            name: data[0].songs[index].name,
-            singer: data[0].songs[index].ar[0].name,
-            albumPic: data[0].songs[index].al.picUrl,
-            location: item.url,
-            album: data[0].songs[index].al.name
+            name: item.name,
+            singer: item.ar[0].name,
+            albumPic: item.al.picUrl,
+            location,
+            album: item.al.name
           })
         })
         commit('addToList', playAudio)
