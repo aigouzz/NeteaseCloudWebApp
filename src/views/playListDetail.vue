@@ -118,14 +118,7 @@ export default {
     playAudio (song) {
       document.getElementById('audioPlay').pause()
       this.$store.commit('pause')
-      var audio = {}
-      audio.id = song.id  // id
-      audio.singer = song.ar[0].name // 演唱者
-      audio.albumPic = song.al.picUrl
-      audio.name = song.name
-      // 通过Vuex改变状态
-      this.$store.commit('addToList', audio)
-      this.$store.dispatch('getSong', audio.id)
+      this.$store.dispatch('getSong', song.id)
     },
     // 播放全部
     playAll () {

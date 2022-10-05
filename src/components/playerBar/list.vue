@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'list',
   data () {
@@ -48,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
+    ...mapState([
       'songList',
       'audio'
     ])
@@ -56,7 +56,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-@import "../assets/theme.less";
+@import "../../assets/theme.less";
 html,body { height:100%; overflow:hidden }
 .title-wrapper {
   font-size: 16px;

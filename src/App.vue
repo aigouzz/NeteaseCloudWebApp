@@ -3,11 +3,11 @@
     <keep-alive>
         <router-view></router-view>
     </keep-alive>
-    <Player v-if="songList.length > 0"></Player>
+    <Player v-if="showBar"></Player>
   </div>
 </template>
 <script>
-  import Player from './components/playerBar'
+  import Player from './components/playerBar/playerBar'
   import { mapState } from 'vuex'
   export default {
     data () {
@@ -22,8 +22,8 @@
     },
     computed: {
       ...mapState([
-        'songList',
-        'showDetail'
+        'showBar',
+        'audio'
       ])
     }
   }

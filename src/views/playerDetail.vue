@@ -3,7 +3,7 @@
       <div class="player-wrapper">
         <div class="player-inner">
           <mu-appbar>
-            <mu-icon-button icon='arrow_back' @click="back"  slot="left"/>
+            <mu-icon-button icon='arrow_back' @click="back" slot="left"/>
             <div class="play-title">
               <div class="play-name"><span>{{audio.name}}</span></div>
               <div class="play-singer"> {{audio.singer}} </div>
@@ -59,7 +59,7 @@
 </template>
 <script>
 import { mapGetters, mapMutations } from 'vuex'
-import BottomSheet from '../components/list'
+import BottomSheet from '../components/playerBar/list'
 import api from '../api'
 export default {
   data () {

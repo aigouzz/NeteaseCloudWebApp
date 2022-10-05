@@ -26,8 +26,8 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapGetters } from 'vuex'
-import BottomSheet from '../components/list'
+import { mapMutations, mapState } from 'vuex'
+import BottomSheet from './list'
 export default {
   data () {
     return {
@@ -83,6 +83,7 @@ export default {
     },
     // 更新进度条事件
     updateTime () {
+      console.log(this)
       var vm = this
       var myaudio = document.getElementById('audioPlay')
       var time = parseInt(myaudio.currentTime)
@@ -105,7 +106,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
+    ...mapState([
       'audio',
       'change',
       'playing',
@@ -119,7 +120,7 @@ export default {
 }
 </script>
 <style lang="less" scopoed>
-  @import "../assets/theme.less";
+  @import "../../assets/theme.less";
   .foot {
     width: 100%;
     position: fixed;
@@ -141,7 +142,7 @@ export default {
     float: left;
     padding-left: 0.2rem;
     padding-top: 0.2rem;
-    background: ur('../../static/player-bar.png') no-repeat;
+    background: ur('../../../static/player-bar.png') no-repeat;
     background-size: cover;
   }
   .player-mini .mini-content .cover img {
@@ -197,19 +198,19 @@ export default {
 
   /*列表按钮*/
   .player-list {
-    background: url("../../static/playbar_btn_playlist.png") no-repeat!important;
+    background: url("../../../static/playbar_btn_playlist.png") no-repeat!important;
     background-size: cover!important;
   }
   .player {
-    background: url("../../static/playbar_btn_play.png") no-repeat!important;
+    background: url("../../../static/playbar_btn_play.png") no-repeat!important;
     background-size: cover!important;
   }
   .pause {
-    background: url("../../static/playbar_btn_pause.png") no-repeat!important;
+    background: url("../../../static/playbar_btn_pause.png") no-repeat!important;
     background-size: cover!important;
   }
   .next {
-    background: url("../../static/playbar_btn_next.png") no-repeat!important;
+    background: url("../../../static/playbar_btn_next.png") no-repeat!important;
     background-size: cover!important;
   }
 

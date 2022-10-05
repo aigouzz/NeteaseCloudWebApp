@@ -18,7 +18,7 @@ const store = new Vuex.Store({
     currentIndex: 0, // 当前播放的歌曲位置
     playing: false, // 是否正在播放
     loading: false, // 是否正在加载中
-    showDetail: false,
+    showBar: false,
     songList: [],    // 播放列表
     currentTime: 0,
     tmpCurrentTime: 0,
@@ -30,7 +30,7 @@ const store = new Vuex.Store({
     audio: state => state.audio,
     playing: state => state.playing,
     loading: state => state.loading,
-    showDetail: state => state.showDetail,
+    showBar: state => state.showBar,
     durationTime: state => state.durationTime,
     currentIndex: state => state.currentIndex,
     bufferedTime: state => state.bufferedTime,
@@ -134,12 +134,15 @@ const store = new Vuex.Store({
         })
         if (!flag) {
           state.songList.push(item)
-          state.currentIndex = state.songList.length - 1
+          state.currentIndex = state.songList.length
         }
       })
     },
     setLrc (state, lrc) {
       state.lyric = lrc
+    },
+    setBar (state, payload) {
+      state.showBar = payload
     }
   },
   // 异步的数据操作
@@ -156,17 +159,20 @@ const store = new Vuex.Store({
       Promise.all([api.getSongDetail(id), api.getSongUrl(id)]).then(data => {
         // 统一数据模型，方便后台接口的改变
         console.log(data)
-        let playAudio = {
-          id,
-          name: data[0].songs[0].name,
-          singer: data[0].songs[0].ar[0].name,
-          albumPic: data[0].songs[0].al.picUrl,
-          location: data[1].data[0].url,
-          album: data[0].songs[0].al.name
-        }
-        console.log(playAudio)
-        commit('addToList', [playAudio])
+        let playAudio = []
+        data[1].data.forEach((item, index) => {
+          playAudio.push({
+            id: item.id,
+            name: data[0].songs[index].name,
+            singer: data[0].songs[index].ar[0].name,
+            albumPic: data[0].songs[index].al.picUrl,
+            location: item.url,
+            album: data[0].songs[index].al.name
+          })
+        })
+        commit('addToList', playAudio)
         commit('setAudio')
+        commit('setBar', true)
       })
       .catch((error) => {     // 错误处理
         console.log(error)
