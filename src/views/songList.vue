@@ -12,7 +12,7 @@
                 </router-link>
               </mu-flexbox-item>
             </mu-flexbox>
-             <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore"/>
+            <mu-infinite-scroll :scroller="scroller" :loading="loading" @load="loadMore"/>
         </div>
     </div>
 </template>
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     getData () {
-      this.loading = true
+      this.offset === 0 ? (this.loading = true) : ''
       this.$http.get(api.getPlayListByWhere(this.offset, 6)).then((data) => {
         var total = data.total
         var list = (data.playlists)
@@ -52,6 +52,7 @@ export default {
       })
     },
     loadMore () {
+      this.offset += 6
       this.getData()
     }
   },

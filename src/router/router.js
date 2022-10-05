@@ -7,44 +7,47 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({
   mode: 'history',
-  routes: [{
-    path: '/index',
-    component: require('../views/index'),
-    children: [
-      {
-        path: 'rage',
-        component: require('../views/rage')
-      },
-      {
-        path: 'songList',
-        component: require('../views/songList')
-      },
-      {
-        path: 'leaderBoard',
-        component: require('../views/leaderBoard')
-      },
-      {
-        path: 'hotSinger',
-        component: require('../views/hotSinger')
-      }
-    ]
-  }, {
-    name: 'playerDetail',
-    path: '/playerDetail/:id',
-    component: require('../views/playerDetail')
-  }, {
-    path: '/playListDetail/:id',
-    name: 'playListDetail',
-    component: require('../views/playListDetail')
-  },
-  {
-    path: '/search',
-    name: 'search',
-    component: require('../views/search.vue')
-  },
-  {
-    path: '*', redirect: '/index/rage'
-  }]
+  routes: [
+    {
+      path: '/index',
+      component: require('../views/index'),
+      children: [
+        {
+          path: 'rage',
+          component: require('../views/rage')
+        },
+        {
+          path: 'songList',
+          component: require('../views/songList')
+        },
+        {
+          path: 'leaderBoard',
+          component: require('../views/leaderBoard')
+        },
+        {
+          path: 'hotSinger',
+          component: require('../views/hotSinger')
+        }
+      ]
+    },
+    {
+      name: 'playerDetail',
+      path: '/playerDetail/:id',
+      component: require('../views/playerDetail')
+    },
+    {
+      path: '/playListDetail/:id',
+      name: 'playListDetail',
+      component: require('../views/playListDetail')
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: require('../views/search.vue')
+    },
+    {
+      path: '*', redirect: '/index/rage'
+    }]
 })
 
 export default router
