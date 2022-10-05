@@ -83,7 +83,6 @@ export default {
     },
     // 更新进度条事件
     updateTime () {
-      console.log(this)
       var vm = this
       var myaudio = document.getElementById('audioPlay')
       var time = parseInt(myaudio.currentTime)

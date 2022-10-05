@@ -107,6 +107,14 @@ export default {
       this.isloading = true
       api.getPlayListDetail(this.$route.params.id).then(data => {
         this.list = data.playlist.tracks
+        this.ids = ''
+        data.playlist.trackIds.forEach((item, index) => {
+          if (index === 0) {
+            this.ids += `${item.id}`
+          } else {
+            this.ids += `,${item.id}`
+          }
+        })
         this.isloading = false
       }).catch((error) => {
         console.log('加载歌单信息出错:' + error)
@@ -123,16 +131,7 @@ export default {
     // 播放全部
     playAll () {
       // 添加专辑内所有歌曲到一个新数组
-      let items = []
-      this.list.forEach((item) => {
-        items.push({
-          albumPic: item.al.picUrl,
-          id: item.id,
-          name: item.al.name,
-          singer: item.ar[0].name
-        })
-      })
-      this.$store.commit('addToList', items)
+      this.$store.dispatch('getSong', this.ids)
     }
   },
   computed: {

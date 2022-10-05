@@ -22,7 +22,9 @@
         <div class="g-title mv">推荐MV <router-link :to="{}">更多></router-link></div>
         <mu-flexbox wrap="wrap" justify="space-between" class="box" :gutter="0">
           <mu-flexbox-item basis="48%" class="mv-item" v-for="item in mvList" :key="item.artistId">
-            <img class="img-response" :src="item.picUrl">
+            <div class="mv-img">
+              <img class="img-response" :src="item.picUrl" />
+            </div>
             <div class="mv-name">{{item.name}}</div>
             <div class="mv-author">{{item.artistName}}</div>
           </mu-flexbox-item>
@@ -184,7 +186,14 @@ export default {
       color: #666;
     }
   }
-  
+  .mv-img{
+    width: 100%;
+    height: 4.48rem;
+    overflow: hidden;
+    img{
+      width: 100%;
+    }
+  }
   .mv-name {
     width: 100%;
     height: 21px;
