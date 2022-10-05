@@ -1,9 +1,6 @@
 <template>
     <div>
-      <div class="loading-wrapper" v-if="isloading" >
-          <div class="loading"></div>
-          <div class="loading-txt">正在加载中</div>
-      </div>
+      <Loading :isloading="isloading"></Loading>
       <div class="container" v-show="!isloading">
       <div id="slider">
         <swiper :options="swiperOption">
@@ -125,28 +122,7 @@
       color: #666;
     }
   }
-  .loading {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    background: #fff;
-    width: 2.5rem;
-    height: 2.5rem;
-    margin-top: 70%;
-    margin-left: -1.25rem;
-    background: url('../../static/rage_loading.png') no-repeat;
-    background-size: cover;
-    -webkit-animation: rotating 5s  linear infinite;
-    animation: rotating 5s linear infinite;
-  }
-  .loading-txt {
-    position: absolute;
-    top:0;
-    color: #4a4a4a;
-    margin-top: 87%;
-    width: 100%;
-    text-align:center;
-  }
+  
   .mv-name {
     width: 100%;
     height: 21px;
@@ -168,6 +144,7 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import api from '../api'
+import Loading from '../components/common/Loading.vue'
 export default {
   data () {
     return {
@@ -183,7 +160,8 @@ export default {
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    Loading
   },
   created () {
     this.loadData()

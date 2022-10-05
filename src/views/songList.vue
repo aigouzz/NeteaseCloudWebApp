@@ -1,6 +1,7 @@
 <template>
     <div class="wrapper playList">
-      <div class="content">
+      <Loading :isloading="loading"></Loading>
+      <div class="content" v-if="!loading">
         <div class="title">全部歌单 </div>
             <mu-flexbox wrap="wrap" justify="space-around" class="box" :gutter="0">
               <mu-flexbox-item basis="40%" class="list-item" :key="item.id" v-for="item in playList">
@@ -17,7 +18,11 @@
 </template>
 <script>
 import api from '../api'
+import Loading from '../components/common/Loading.vue'
 export default {
+  components: {
+    Loading
+  },
   data () {
     return {
       scroller: null,
@@ -101,17 +106,16 @@ export default {
       width: 8rem;
       height: 8rem;
     }
-     &-img[lazy=loading] {
+    &-img[lazy=loading] {
       background: url('../../static/default_cover.png') no-repeat;
       background-size: cover;
     }
 
-        &-name {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
+    &-name {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 }
 </style>
