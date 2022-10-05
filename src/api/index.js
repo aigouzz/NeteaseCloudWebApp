@@ -1,4 +1,4 @@
-const _baseUrl = 'http://127.0.0.1:3000'
+const _baseUrl = 'https://netease-n3ts0l304-aigouzz.vercel.app'
 export default {
   /**
    * 获取首页Banner图片数据

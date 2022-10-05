@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App'
-import Axios from './utils/diyaxios'
+import axios from './utils/request'
 import router from './router/router'
 import store from './store'
 import MuseUI from 'muse-ui'
@@ -16,7 +16,7 @@ if ('addEventListener' in document) {
 
 Vue.use(MuseUI)
 Vue.use(Toast)
-Vue.prototype.$http = Axios // 类似于vue-resource的调用方法，之后可以在实例里直接用this.$http.get()等
+Vue.prototype.$http = axios // 类似于vue-resource的调用方法，之后可以在实例里直接用this.$http.get()等
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

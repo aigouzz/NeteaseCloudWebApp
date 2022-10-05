@@ -1,14 +1,17 @@
-import axios from 'axios'
-axios.defaults.timeout = 8000
-// 添加请求头
-axios.defaults.withCredentials = true
+import Axios from 'axios'
+import Vue from 'vue'
+
+let axios = Axios.create({
+  timeout: 8000,
+  withCredentials: true
+})
 // code状态码200判断
 axios.interceptors.response.use((res) => {
   if (res.status === 654) { // 百度云请求超时检测
-    window.alert('请求超时！')
+    Vue.toast('请求超时！')
   }
   if (res.data.code !== 200) {
-    window.alert('数据返回有误')
+    Vue.toast('数据返回有误')
     return Promise.reject(res)
   }
   return res.data

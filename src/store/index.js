@@ -155,13 +155,16 @@ const store = new Vuex.Store({
       commit('openLoading')
       Axios.get(api.getSong(id)).then(data => {
         // 统一数据模型，方便后台接口的改变
-        var url = data.data[0].url
+        let url = data.data[0].url
         commit('setAudio')
         commit('setLocation', url)
       })
       .catch((error) => {     // 错误处理
         console.log(error)
-        window.alert('获取歌曲信息出错！')
+        Vue.toast('获取歌曲信息出错！', {
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        })
       })
     }
   }

@@ -17,6 +17,9 @@
     components: {
       Player
     },
+    created () {
+      this.$store.dispatch('getSong', 347230)
+    },
     computed: {
       ...mapGetters([
         'songList',
