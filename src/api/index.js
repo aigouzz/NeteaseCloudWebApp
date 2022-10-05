@@ -1,22 +1,22 @@
-const _baseUrl = 'https://netease-n3ts0l304-aigouzz.vercel.app'
+import { getRequest } from '../utils/axios'
 export default {
   /**
    * 获取首页Banner图片数据
    */
   getBannerList () {
-    return `${_baseUrl}/banner`
+    return getRequest(`/banner`)
   },
   /**
    * 获取推荐歌单
    */
   getPersonalized () {
-    return `${_baseUrl}/personalized`
+    return getRequest(`/personalized`)
   },
   /**
    * 获取推荐 mv
    */
   getPersonalizedMV () {
-    return `${_baseUrl}/personalized/mv`
+    return getRequest(`/personalized/mv`)
   },
   /**
    *
@@ -27,33 +27,40 @@ export default {
    * @param {*} limit
    */
   getPlayListByWhere (offset, limit) {
-    return `${_baseUrl}/top/playlist?limit=${limit}&order=all&offset=${offset}`
+    return getRequest(`/top/playlist?limit=${limit}&order=all&offset=${offset}`)
   },
   /**
    * 获取歌词API
    * @param {Number} id
    */
   getLrc (id) {
-    return `${_baseUrl}/lyric?id=${id}`
+    return getRequest(`/lyric?id=${id}`)
   },
   /**
-   * 获取歌曲 播放URL
+   * 获取歌曲详情
    * @param {Number} id
    */
-  getSong (id) {
-    return `${_baseUrl}/song/url?id=${id}`
+  getSongDetail (id) {
+    return getRequest(`/song/detail?ids=${id}`)
+  },
+  /**
+   * 获取歌曲url
+   * @param {Number} id
+   */
+  getSongUrl (id) {
+    return getRequest(`/song/url?id=${id}`)
   },
   /**
    * 获取歌单详情
    * @param {Number} id
    */
   getPlayListDetail (id) {
-    return `${_baseUrl}/playlist/detail?id=${id}`
+    return getRequest(`/playlist/detail?id=${id}`)
   },
   getMv (id) {
-    return _baseUrl + '?type=mv&id=' + id
+    return getRequest('/mv?mvid=' + id)
   },
   search (words) {
-    return _baseUrl + '?type=search&s=' + words
+    return getRequest(`/search?keywords=${words}`)
   }
 }

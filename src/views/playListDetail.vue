@@ -105,7 +105,7 @@ export default {
     },
     getData () {
       this.isloading = true
-      this.$http.get(api.getPlayListDetail(this.$route.params.id)).then(data => {
+      api.getPlayListDetail(this.$route.params.id).then(data => {
         this.list = data.playlist.tracks
         this.isloading = false
       }).catch((error) => {

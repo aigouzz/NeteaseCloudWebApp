@@ -31,6 +31,68 @@
       </div>
     </div>
 </template>
+<script>
+import 'swiper/dist/css/swiper.css'
+import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import api from '../api'
+import Loading from '../components/common/Loading.vue'
+export default {
+  data () {
+    return {
+      swiperOption: {
+        pagination: '.swiper-pagination',
+        paginationClickable: true
+      },
+      isloading: true,
+      bannerList: [],
+      playList: [],
+      mvList: []
+    }
+  },
+  components: {
+    swiper,
+    swiperSlide,
+    Loading
+  },
+  created () {
+    this.loadData()
+  },
+  mounted () {
+    console.log(this)
+  },
+  methods: {
+    /**
+     * 加载所有数据
+     * @author javaSwing
+     */
+    loadData () {
+      let personSongList = api.getPersonalized()
+      let bannerList = api.getBannerList()
+      let personMVList = api.getPersonalizedMV()
+      Promise.all([personSongList, bannerList, personMVList]).then(data => {
+        this.playList = data[0].result.length > 6 && data[0].result.slice(0, 6)
+        this.bannerList = data[1].banners
+        this.mvList = data[2].result.length > 6 ? data[2].result.slice(0, 6) : data[2].result
+        this.isloading = false
+      }).catch((err) => {
+        this.$toast(err, {
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        })
+      })
+    }
+  },
+  filters: {
+    formatCount (v) {
+      if (v < 9999) {
+        return v
+      } else {
+        return (v / 10000).toFixed(0) + '万'
+      }
+    }
+  }
+}
+</script>
 <style lang="less" scoped>
   .img-response {
     max-width: 100%;
@@ -140,62 +202,3 @@
       }
   }
 </style>
-<script>
-import 'swiper/dist/css/swiper.css'
-import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import api from '../api'
-import Loading from '../components/common/Loading.vue'
-export default {
-  data () {
-    return {
-      swiperOption: {
-        pagination: '.swiper-pagination',
-        paginationClickable: true
-      },
-      isloading: true,
-      bannerList: [],
-      playList: [],
-      mvList: []
-    }
-  },
-  components: {
-    swiper,
-    swiperSlide,
-    Loading
-  },
-  created () {
-    this.loadData()
-  },
-  methods: {
-    /**
-     * 加载所有数据
-     * @author javaSwing
-     */
-    loadData () {
-      let personSongList = this.$http.get(api.getPersonalized())
-      let bannerList = this.$http.get(api.getBannerList())
-      let personMVList = this.$http.get(api.getPersonalizedMV())
-      Promise.all([personSongList, bannerList, personMVList]).then(data => {
-        this.playList = data[0].result.length > 6 && data[0].result.slice(0, 6)
-        this.bannerList = data[1].banners
-        this.mvList = data[2].result.length > 6 ? data[2].result.slice(0, 6) : data[2].result
-        this.isloading = false
-      }).catch((err) => {
-        this.$toast(err, {
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
-        })
-      })
-    }
-  },
-  filters: {
-    formatCount (v) {
-      if (v < 9999) {
-        return v
-      } else {
-        return (v / 10000).toFixed(0) + '万'
-      }
-    }
-  }
-}
-</script>

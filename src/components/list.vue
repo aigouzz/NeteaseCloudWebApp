@@ -2,11 +2,11 @@
   <div>
     <mu-bottom-sheet :open="bottomSheet" @close="closeBottomSheet ">
       <div class="title-wrapper">
-        播放列表（{{songList.length}}）
+        播放列表({{songList.length}})
       </div>
       <hr class="mu-divider">
       <div class="list-wrapper">
-        <div class="list-item" :class="{on: item.id == audio.id}" v-for="(item, index) in songList">
+        <div class="list-item" v-for="(item, index) in songList" :class="{'on': item.id === audio.id}">
           <div class="left" @click="play(index)">
             <span class="list-name">{{item.name}}</span> <span class="list-singer">&nbsp;-{{item.singer}}&nbsp;</span>
           </div>

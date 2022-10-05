@@ -40,7 +40,7 @@ export default {
   methods: {
     getData () {
       this.offset === 0 ? (this.loading = true) : ''
-      this.$http.get(api.getPlayListByWhere(this.offset, 6)).then((data) => {
+      api.getPlayListByWhere(this.offset, 6).then((data) => {
         var total = data.total
         var list = (data.playlists)
         for (let i = 0; i < list.length; i++) {

@@ -7,12 +7,12 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     audio: {
-      'id': 0,
-      'name': '歌曲名称',
-      'singer': '演唱者',
-      'albumPic': '/static/placeholder_disk_play_program.png',
-      'location': '',
-      'album': ''
+      id: 0,
+      name: '歌曲名称',
+      singer: '演唱者',
+      albumPic: '/static/placeholder_disk_play_program.png',
+      location: '',
+      album: ''
     },
     lyric: '',
     currentIndex: 0, // 当前播放的歌曲位置
@@ -123,7 +123,7 @@ const store = new Vuex.Store({
       state.audio = state.songList[state.currentIndex - 1]
     },
     addToList (state, songs) {
-      var items = Array.prototype.concat.call(songs)
+      var items = songs.slice()
       items.forEach(item => {
         var flag = false
         state.songList.forEach(function (element, index) { // 检测歌曲重复
@@ -134,7 +134,7 @@ const store = new Vuex.Store({
         })
         if (!flag) {
           state.songList.push(item)
-          state.currentIndex = state.songList.length
+          state.currentIndex = state.songList.length - 1
         }
       })
     },
@@ -153,11 +153,20 @@ const store = new Vuex.Store({
         source.cancel()
       }
       commit('openLoading')
-      Axios.get(api.getSong(id)).then(data => {
+      Promise.all([api.getSongDetail(id), api.getSongUrl(id)]).then(data => {
         // 统一数据模型，方便后台接口的改变
-        let url = data.data[0].url
+        console.log(data)
+        let playAudio = {
+          id,
+          name: data[0].songs[0].name,
+          singer: data[0].songs[0].ar[0].name,
+          albumPic: data[0].songs[0].al.picUrl,
+          location: data[1].data[0].url,
+          album: data[0].songs[0].al.name
+        }
+        console.log(playAudio)
+        commit('addToList', [playAudio])
         commit('setAudio')
-        commit('setLocation', url)
       })
       .catch((error) => {     // 错误处理
         console.log(error)

@@ -1,14 +1,14 @@
 <template>
   <div>
-      <keep-alive>
-          <router-view></router-view>
-      </keep-alive>
-    <Player v-show="songList.length > 0 && !showDetail"></Player>
+    <keep-alive>
+        <router-view></router-view>
+    </keep-alive>
+    <Player v-if="songList.length > 0"></Player>
   </div>
 </template>
 <script>
   import Player from './components/playerBar'
-  import { mapGetters } from 'vuex'
+  import { mapState } from 'vuex'
   export default {
     data () {
       return {
@@ -21,7 +21,7 @@
       this.$store.dispatch('getSong', 347230)
     },
     computed: {
-      ...mapGetters([
+      ...mapState([
         'songList',
         'showDetail'
       ])

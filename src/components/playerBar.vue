@@ -2,7 +2,7 @@
   <div class="foot">
     <div class="player-mini">
       <div class="mini-content">
-       <audio :src="audio.location" @timeupdate="updateTime" @canplay="canPlaySong" @error="loadError" @ended="next" id="audioPlay"/>
+        <audio :src="audio.location" @timeupdate="updateTime" @canplay="canPlaySong" @error="loadError" @ended="next" id="audioPlay" />
         <div class="cover" @click="showDetail">
           <mu-circular-progress v-show="loading" :size="30"/>
           <img class="xmplogo" :src="audio.albumPic + '?param=100y100'" v-show="!loading" :alt="audio.name">
@@ -18,7 +18,8 @@
         </div>
         <div class="pro">
           <div class="pro-load proload" :style="{'-webkit-transform':'translateX(' + prBufferedTime +'%)' }"></div>
-          <div class="pro-play proplay" :style="{'-webkit-transform':'translateX(' + prCurrentTime +'%)' }"></div> </div>
+          <div class="pro-play proplay" :style="{'-webkit-transform':'translateX(' + prCurrentTime +'%)' }"></div> 
+        </div>
       </div>
     </div>
     <BottomSheet ref="bottomSheet"></BottomSheet>

@@ -110,7 +110,7 @@ export default {
         this.afterLrc = [{'txt': '这里显示歌词哦！'}]
         return
       }
-      this.$http.get(api.getLrc(id)).then((data) => {
+      api.getLrc(id).then((data) => {
         // 1、先判断是否有歌词
         if (!data.lrc.lyric) {
           this.afterLrc = [{'txt': '(⊙０⊙) 暂无歌词'}]
