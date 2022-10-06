@@ -59,9 +59,6 @@ export default {
   created () {
     this.loadData()
   },
-  mounted () {
-    console.log(this)
-  },
   methods: {
     /**
      * 加载所有数据
