@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState, mapGetters } from 'vuex'
 import BottomSheet from './list'
 export default {
   data () {
@@ -111,8 +111,10 @@ export default {
       'playing',
       'loading',
       'currentTime',
+      'tmpCurrentTime'
+    ]),
+    ...mapGetters([
       'prBufferedTime',
-      'tmpCurrentTime',
       'prCurrentTime'
     ])
   }

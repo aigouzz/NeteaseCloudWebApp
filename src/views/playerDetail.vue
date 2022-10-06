@@ -78,7 +78,12 @@ export default {
       if (parseInt(to.params.id) !== parseInt(vm.audio.id) || vm.lyric === '') {
         vm.loadLrc(vm.audio.id)
       }
+      vm.$store.commit('setBar', false)
     })
+  },
+  beforeRouteLeave (to, from, next) {
+    this.$store.commit('setBar', true)
+    next()
   },
   watch: {
     audio (val) {
@@ -267,8 +272,8 @@ export default {
       }
       .cd-wrapper {
         position: relative;
-        max-width: 65%;
-        min-height: 80px;
+        width: 9.6rem;
+        height: 9.6rem;
         padding: .8rem .9rem;
         border-radius: 50%;
         background: rgba(107, 107, 107, 0.3);

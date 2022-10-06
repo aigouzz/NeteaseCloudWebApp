@@ -3,7 +3,7 @@
     <keep-alive>
         <router-view></router-view>
     </keep-alive>
-    <Player v-if="showBar"></Player>
+    <Player v-show="showBar"></Player>
   </div>
 </template>
 <script>
@@ -18,7 +18,7 @@
       Player
     },
     created () {
-      this.$store.dispatch('getSong', 347230)
+      this.$store.dispatch('getSong', 386538)  // 知足 - 五月天
     },
     computed: {
       ...mapState([

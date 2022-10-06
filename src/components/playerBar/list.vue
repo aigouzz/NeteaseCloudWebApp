@@ -11,7 +11,7 @@
             <span class="list-name">{{item.name}}</span> <span class="list-singer">&nbsp;-{{item.singer}}&nbsp;</span>
           </div>
           <span class="list-btn" @click="remove(index)">x</span>
-          <hr class="mu-divider">
+          <hr class="mu-divider" v-if="index !== 0">
         </div>
       </div>
     </mu-bottom-sheet>
